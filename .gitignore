@@ -3,11 +3,6 @@
 *.nav
 *.out
 *.snm
-<<<<<<< HEAD
 *.toc
 *.synctex.gz
-=======
-*.synctex.gz
-*.toc
->>>>>>> 89b4216fe18a552118677d216ad4eed52544592d
-*.otf
+# *.otf
