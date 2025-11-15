@@ -1,0 +1,308 @@
+\documentclass[]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{utopia} %font utopia imported
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+\usefonttheme{professionalfonts}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{extarrows}
+% \usepackage{enumitem}
+
+\setCJKmainfont{SourceHanSansSC-Regular.otf}[Path=../fonts/, BoldFont=bold.otf]
+
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{institute}{size=\small}
+
+\setstretch{1.3}
+% \setlength{\parindent}{2em}
+% \setlength{\parskip}{0pt}
+
+% \setlist[itemize]{leftmargin=2em}
+
+% ↓↓↓ Modify this ↓↓↓
+\title{高等数学I\quad 习题课09}
+\subtitle{导数，期中复习}
+\date[2025.11.13]{2025.11.13}
+% ↑↑↑ Modify this ↑↑↑
+
+\author[上海科技大学]{}
+\institute[]{上海科技大学}
+
+\begin{document}
+
+\begin{frame}
+    \vspace{15pt}
+    \titlepage
+\end{frame}
+
+% \begin{frame}{Quiz}
+%     \[
+%     \text{\Huge 18:00 - 18:40}
+%     \]
+% \end{frame}
+
+\begin{frame}{习题课08 反馈}
+    \begin{columns}
+        % 左栏：文字
+        \begin{column}{0.5\textwidth}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1.0\linewidth]{fb.png}
+                \caption{课程质量}
+            \end{figure}
+        \end{column}
+
+        \begin{column}{0.5\textwidth}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1.0\linewidth]{fb.png}
+                \caption{课堂氛围}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% \begin{frame}{Before we start\dots}
+%     \begin{itemize}
+%         \item 模拟卷1、2已发放，请根据自身需求，有选择性地完成.
+%         \item 关于是否要追加讲评课的调查：
+%     \end{itemize}
+%     \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.4\linewidth]{pollforexam.png}
+%     \end{figure}
+% \end{frame}
+
+% \begin{frame}{补充材料}
+%     \url{https://www.bilibili.com/video/BV1qW411N7FU}
+%     \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.8\linewidth]{3b1b.jpg}
+%     \end{figure}
+% \end{frame}
+
+\begin{frame}{目录}
+    \tableofcontents
+\end{frame}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{目录}
+    \tableofcontents[currentsection]
+\end{frame}
+}
+
+\section{微分}
+
+\begin{frame}{思考}
+    考虑如何数值拟合$e^{0.01}$的值，误差不超过$0.01$.
+\end{frame}
+
+\begin{frame}{拟合方法}
+    \begin{itemize}
+        \item 导数：函数在某点附近的最佳线性拟合
+        \item \textbf{函数可导}：在足够小的范围之内，函数可以近似地被视为直线\\
+        $\Rightarrow$使用导数计算出函数的近似值，进行\textbf{非线性函数的局部线性化}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{微分}
+    例3.13
+    \begin{itemize}
+        \item 一个半径为$r$的金属球，因温度改变，半径变为$r+\Delta r$，求体积的改变量
+        \begin{align*}
+        \Delta V&=\frac43\pi[(r+\Delta r)^3-r^3]=4\pi r^2\Delta r+4\pi r(\Delta r)^2+\frac43\pi(\Delta r)^3\\
+        &=4\pi r^2\Delta r+o(\Delta r)
+        \end{align*}
+        \item $\Delta V$ 由关于$\Delta r$的线性函数与$\Delta r$的高阶无穷小（因为$|\Delta r|$很小）组成.
+        后者在$\Delta r$足够小时可以忽略不计
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{微分}
+    一般地，若函数$y=f(x)$可导，且在点$x_0$附近，自变量发生了一段微小改变$\Delta x$, 则因变量$y$随之发生的改变满足关系
+    \[
+    \Delta y=f'(x_0)\Delta x + o(\Delta x)
+    \]
+    当$\Delta x\rightarrow 0$，$o(\Delta x)$可忽略不计，此时我们可以使用$f'(x_0)\Delta x$来估计$\Delta y$的值，且误差不大于$\Delta x$.
+
+    (如何进一步增加精度？)
+\end{frame}
+
+\begin{frame}{一阶微分形式不变性}
+    对于可微函数$y=f(x)$，记其微分为$\mathrm dy=f'(x)\mathrm dx$. 将$x$换成任一可微函数$\varphi(x)$，公式仍成立：
+    \[
+    \mathrm dy = f'(\varphi(x))\mathrm d\varphi(x)
+    \]
+\end{frame}
+
+\section{链式法则与反函数求导}
+
+\begin{frame}{导数的多种记号}
+    \setlength{\leftmargini}{7em}
+    \begin{itemize}
+        \item [Leibniz] $\displaystyle\frac{\mathrm dy}{\mathrm dx}\qquad$ (Recommended)
+        \item [Lagrange] $f'(x)$
+        \item [Newton] $\dot{y}$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{链式法则}
+    设函数$u=\varphi(x)$在$x$处可导，函数$y=f(u)$在对应$x$的点$u$处可导，则复合函数$y=f[\varphi(x)]$在点$x$处可导，且
+    \[
+    \frac{\mathrm dy}{\mathrm dx}=(\frac{\mathrm d}{\mathrm du}y)\cdot(\frac{\mathrm d}{\mathrm dx}u)
+    \]
+    或
+    \[
+    \frac{\mathrm dy}{\mathrm dx}=f'[\varphi(x)]\varphi'(x)
+    \]
+\end{frame}
+
+\begin{frame}{链式法则}
+    求函数
+    \[
+    f(x)=\sin(x^2)
+    \]
+    的导函数.
+\end{frame}
+
+\begin{frame}{对数求导法}
+    求函数
+    \[
+    y=\frac{e^{2x}\sin^4x}{\sqrt[3]{2x-1}(4x+3)^2}
+    \]
+    的导函数.
+
+    $\Rightarrow$对数求导法不仅可以用于指数的求导，也可以用于复杂因式的求导
+\end{frame}
+
+\begin{frame}{反函数求导}
+    考虑两个函数的图像关系：
+    \[
+    y=x^2(x>0),y=\sqrt x
+    \]
+    互为反函数的两个函数，图像关于$y=x$对称.
+    
+    $\Rightarrow$对应点的切线斜率互为倒数
+\end{frame}
+
+\begin{frame}{反函数求导}
+    函数$x=f(y)$时区间$I$上的严格单调可导函数，且$f'(y)\ne 0$，则它的反函数$y=f^{-1}(x)$在对应点$x$处可导，且
+    \[
+    \displaystyle\frac{\mathrm dy}{\mathrm dx}=\frac{1}{\displaystyle \frac{\mathrm dx}{\mathrm dy}}.
+    \]
+    证明：考虑复合函数$f^{-1}(f(x))$的导函数.
+\end{frame}
+
+\begin{frame}{例}
+    求函数$y=\arcsin x$的导数.
+\end{frame}
+
+\section{隐函数与参数方程求导}
+
+\begin{frame}{从相关变化率开始\dots}
+    一把$5$米长的梯子直靠在墙壁上，底端距离墙面$0$米.现在梯子在墙上的一端以$1$m/s的速度下滑，求
+    梯子底端速度随时间变化的关系式. （不允许使用速度关联）
+\end{frame}
+
+\begin{frame}{思路}
+    存在方程$x(t)^2+y(t)^2=5$.
+    \begin{enumerate}
+        \item 既然$x>0,y>0$，不妨记$x(t)=\sqrt{5-y(t)^2}$，再使用链式法则
+        \item 对等式两边求导：
+        \[
+        \frac{\mathrm d}{\mathrm dt}(x(t)^2+y(t)^2) = 0
+        \]
+        "当$x$和$y$分别都变动一点的时候，函数值会变动多少？"$\Rightarrow 0.$
+
+        那么，$\Delta x$与$\Delta y$必然满足如下关系\dots
+        \[
+        2x\Delta x+2y\Delta y = 0.
+        \]
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{隐函数求导}
+    \begin{itemize}
+        \item 隐函数表征了多个变量之间的固定关系.不论这个关系如何改变，隐函数的等式始终成立.\\
+        $\Rightarrow$将隐函数化为$f(x,y)=0$的形式，则左边函数的变化率始终为$0$.
+        \item 对$f(x,y)$求微分，即可得到$\mathrm dx,\mathrm dy$之间的关系
+        \item （这一部分的知识在学习了第8章-多元微分学后会有更深刻的理解\dots 现在先接受它！）
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{参数方程求导}
+    对于参数方程决定的函数
+    \[
+    \left\{\begin{array}{l}
+        x=\varphi(t)\\
+        y=\psi(t)
+    \end{array},\right.
+    \]
+    若$\varphi(t),\psi(t)$可导，则
+    \[
+    \frac{\mathrm dy}{\mathrm dx}=(\frac{\mathrm d}{\mathrm dt}y)\Big/(\frac{\mathrm d}{\mathrm dt}x)
+    \]
+\end{frame}
+
+\begin{frame}{又一次回到相关变化率}
+    一把$5$米长的梯子直靠在墙壁上，底端距离墙面$0$米.现在梯子在墙上的一端以$1$m/s的速度下滑，求
+    梯子底端速度随时间变化的关系式.
+\end{frame}
+
+\begin{frame}{参数方程求导}
+    再一次考虑
+    \[
+    \left\{\begin{array}{l}
+        x=\varphi(t)\\
+        y=\xi(t)
+    \end{array},\right.
+    \]
+    “当$t$变动一点的时候，$x$和$y$分别会变动多少？”
+\end{frame}
+
+
+
+\section{高阶导数}
+
+
+
+\begin{frame}{定理}
+    设函数$u(x),v(x)$在区间$I$上$n$阶可导，$\alpha,\beta\in\mathbb R$，则：
+    \begin{itemize}
+        \item $\alpha u(x)+\beta v(x), u(x)v(x)$在$I$上均$n$阶可导
+        \item $[\alpha u(x)+\beta v(x)]^{(n)}=\alpha u^{(n)}(x)+\beta v^{(n)}(x)$
+        \item $\displaystyle[u(x)v(x)]^{(n)}=\sum_{k=0}^n{n\choose k}u^{(k)}(x)v^{(n-k)}(x)$
+    \end{itemize}
+    证明：数学归纳法
+\end{frame}
+
+% \section*{}
+% \begin{frame}{反馈问卷}
+%     \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.5\linewidth]{qrcode.png}
+%     \end{figure}
+% \end{frame}
+
+
+% -------------------------------------------------------
+% \section*{}
+% \begin{frame}
+% \vspace{25pt}
+% \[
+% \text{\Huge Office Hour}
+% \]
+% \end{frame}
+
+\end{document}

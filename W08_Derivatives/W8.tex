@@ -1,0 +1,285 @@
+\documentclass[]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{utopia} %font utopia imported
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+\usefonttheme{professionalfonts}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{extarrows}
+% \usepackage{enumitem}
+
+\setCJKmainfont{SourceHanSansSC-Regular.otf}[Path=../fonts/, BoldFont=bold.otf]
+
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{institute}{size=\small}
+
+\setstretch{1.3}
+% \setlength{\parindent}{2em}
+% \setlength{\parskip}{0pt}
+
+% \setlist[itemize]{leftmargin=2em}
+
+% ↓↓↓ Modify this ↓↓↓
+\title{高等数学I\quad 习题课08}
+\subtitle{闭区间上的连续函数，导数}
+\date[2025.11.6]{2025.11.6}
+% ↑↑↑ Modify this ↑↑↑
+
+\author[上海科技大学]{}
+\institute[]{上海科技大学}
+
+\begin{document}
+
+\begin{frame}
+    \vspace{15pt}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Quiz}
+    \[
+    \text{\Huge 18:00 - 18:40}
+    \]
+\end{frame}
+
+\begin{frame}{习题课07 反馈}
+    \begin{columns}
+        % 左栏：文字
+        \begin{column}{0.5\textwidth}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1.0\linewidth]{fb1.png}
+                \caption{课程质量}
+            \end{figure}
+        \end{column}
+
+        \begin{column}{0.5\textwidth}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1.0\linewidth]{fb2.png}
+                \caption{课堂氛围}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{习题课07 反馈}
+    \begin{itemize}
+        \item 找一些往年题目进行讲解，熟悉考试风格
+        \begin{itemize}
+            \item 目前学到的内容太少，暂时找不到合适的题目
+        \end{itemize}
+        \item 证明题多留点时间思考
+        \begin{itemize}
+            \item OK
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{目录}
+    \tableofcontents
+\end{frame}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{目录}
+    \tableofcontents[currentsection]
+\end{frame}
+}
+
+\section{闭区间上的连续函数}
+
+\begin{frame}{性质}
+    若$f\in C[a,b]$,则：
+    \begin{enumerate}
+        \item 【有界性定理】$f$在$[a, b]$上有界
+        \item 【最大值最小值定理】$\exists\xi,\eta\in[a,b],\ \text{s.t.} \displaystyle f(\xi)=M=\max_{x\in[a,b]}f(x),f(\eta)=m=\min_{x\in[a,b]}f(x)$
+        \item 【介值定理】\\
+        若$f(a)\ne f(b)$，则$\forall c\in[f(a),f(b)],\exists\xi\in[a, b]\ \text{s.t. }f(\xi)=c.$
+    \end{enumerate}
+    \textbf{连续函数将闭区间映射为闭区间}
+\end{frame}
+
+\begin{frame}{例 (习题2 补充题 7)}
+    设函数$f(x)\in C(\mathbb{R})$，证明：$f(x)$在$\mathbb{R}$上取到它的最小值.
+\end{frame}
+
+\section{导数}
+
+\begin{frame}{引}
+    \vfill
+
+    \quad So far as the theories of mathematics are about reality,
+    they are not certain; so far as they are certain, they are not about reality.
+    \vspace{5pt}
+    \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad-- Albert Einstein
+
+
+    \vfill
+    \begin{flushright}
+        $\scriptscriptstyle{\text{Borrowed from 3Blue1Brown, Essence of Calculus}}$
+    \end{flushright}
+\end{frame}
+
+\begin{frame}{思考}
+    \begin{itemize}
+        \item 导数在实际应用中的含义是？
+        \item “瞬时变化率”？
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{例}
+    \begin{itemize}
+        \item 对于一个物理问题，考察：
+        \item 距离函数$s(t)$与速度函数$v(t)$的关系
+        \item \dots 速度函数$v(t)$？
+        \item “速度”作为一个变化量，为何可以在只有一个时刻的信息的前提下，得到具体的值？
+    \end{itemize}
+\end{frame} 
+
+\begin{frame}{例}
+    \begin{itemize}
+        \item 汽车仪表盘能测量“瞬时速度”吗？显然不能。
+        \item 真实世界中，能做的只有：
+        \begin{itemize}
+            \item 记录两组数据$(t_1, s_1),(t_1+\mathrm dt, s_1+\mathrm ds)$
+            \item 其中，$\mathrm dt$是一个很小的时间间隔
+            \item 计算出长度为$\mathrm dt$的时间间隔中的平均速率
+        \end{itemize}
+        \item 不妨试试用到函数分析当中？
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{例}
+    考察函数$f(x)=x^2$\dots    
+\end{frame}
+
+\begin{frame}{Reality}
+    \begin{itemize}
+        \item 在现实中，我们无法令$\mathrm dt$的值小到完全可忽略；我们能做的仅有进行有限范围内的近似
+        \[
+        \frac{\mathrm ds}{\mathrm dt}(t)=\frac{s(t+\mathrm dt)-s(t)}{\mathrm dt}
+        \]
+        $\mathrm dt$不是\textbf{无穷小}；$\mathrm dt$也不是$0$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Theory}
+    \begin{itemize}
+        \item 但我们可以令$\mathrm dt$非常接近$0$.
+        \[
+        \frac{\mathrm ds}{\mathrm dt}(t)=\lim_{\mathrm dt\rightarrow 0}\frac{s(t+\mathrm dt)-s(t)}{\mathrm dt}
+        \]
+        \item 如此，在某个时刻的“变化率”就有了含义.
+        \item 切线斜率？某一点附近的最佳直线近似！\\（回顾：习题课07 泰勒公式的几何理解）
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Theory}
+    \begin{itemize}
+        \item 我们可以用数学的方法计算出这个极限的值：
+        \[
+        \frac{\mathrm ds}{\mathrm dt}(t)=\lim_{\mathrm dt\rightarrow 0}\frac{s(t+\mathrm dt)-s(t)}{\mathrm dt}
+        \]
+        \item 因此，导数不是一个简单的分数，而是当我们选择的$\mathrm{d}t$值无限逼近于$0$时，这个比值的极限.
+        \item 从图像上如何理解？
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Note}
+    \begin{itemize}
+        \item $\mathrm dt, \mathrm{d}s$都是\textbf{有大小}的量
+        \item 当我们使用符号$\mathrm d$时，我们默认想要求该符号后附的变量趋近于$0$时的结果
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{例}
+    再次考察函数$f(x)=x^2$，计算其在$x=2$处的导数
+\end{frame}
+
+\begin{frame}{投票}
+    
+\end{frame}
+
+\begin{frame}{Note}
+    \begin{itemize}
+        \item 探讨一个物体在某个具体时刻是否在运动是没有意义的；
+        \item 同样的，探讨一个函数在某个具体的点$x_0$\dots
+    \end{itemize}
+    因此：
+    \begin{itemize}
+        \item 使用导数计算出速度为$0$，并不表示物体就是静止的。
+        导数是\textbf{某一点附近的最佳直线近似}，速度只是近似为$0$.
+        \item 扩展到函数性态的研究\dots
+    \end{itemize}
+\end{frame}
+
+\section{导数的几何理解}
+
+\begin{frame}{例}
+    尝试对函数$f(x)=x^2$求导？
+\end{frame}
+
+\begin{frame}{例}
+    利用几何，求函数$\displaystyle f(x)=\frac1x \ (x>0)$的导数
+\end{frame}
+
+\begin{frame}{例}
+    利用几何，求函数$\displaystyle f(x)=\sqrt x$的导数
+\end{frame}
+
+\begin{frame}{例}
+    利用几何，求函数$\displaystyle f(x)=\sin x$的导数
+\end{frame}
+
+\section{四则运算，链式法则}
+
+\begin{frame}{例}
+    尝试用几何的方法，证明导数的加法与乘法法则
+\end{frame}
+
+\begin{frame}{链式法则}
+    求函数
+    \[
+    f(x)=\sin(x^2)
+    \]
+    的导函数.
+\end{frame}
+
+\begin{frame}{链式法则}
+    求函数
+    \[
+    I(x)=f(g(x))
+    \]
+    的导函数.
+\end{frame}
+
+
+% \section*{}
+% \begin{frame}{反馈问卷}
+%     \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.5\linewidth]{qrcode.png}
+%     \end{figure}
+% \end{frame}
+
+
+% -------------------------------------------------------
+% \section*{}
+% \begin{frame}
+% \vspace{25pt}
+% \[
+% \text{\Huge Office Hour}
+% \]
+% \end{frame}
+
+\end{document}
