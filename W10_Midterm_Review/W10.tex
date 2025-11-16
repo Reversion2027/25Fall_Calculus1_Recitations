@@ -1,0 +1,611 @@
+\documentclass[]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{utopia} %font utopia imported
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+\usefonttheme{professionalfonts}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{extarrows}
+% \usepackage{enumitem}
+
+\setCJKmainfont{SourceHanSansSC-Regular.otf}[Path=../fonts/, BoldFont=bold.otf]
+
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{institute}{size=\small}
+
+\setstretch{1.3}
+% \setlength{\parindent}{2em}
+% \setlength{\parskip}{0pt}
+
+% \setlist[itemize]{leftmargin=2em}
+
+% ↓↓↓ Modify this ↓↓↓
+\title{高等数学I\quad 习题课10}
+\subtitle{期中复习}
+\date[2025.11.18]{2025.11.18}
+% ↑↑↑ Modify this ↑↑↑
+
+\author[上海科技大学]{}
+\institute[]{上海科技大学}
+
+\begin{document}
+
+\begin{frame}
+    \vspace{15pt}
+    \titlepage
+\end{frame}
+
+\begin{frame}{目录}
+    \vfill
+    \tableofcontents[hideallsubsections]
+    \vfill
+\end{frame}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{目录}
+    \vfill
+    \tableofcontents[currentsection,hideallsubsections]
+    \vfill
+\end{frame}
+}
+
+
+
+\section{集合、逻辑、函数}
+
+\subsection{集合}
+
+\begin{frame}{集合}
+    \begin{itemize}
+        \item 集合 (set)指一些\textbf{互不相同}的事物构成的整体. 
+        
+        一个集合的成员称为这个集合的元素 (element).
+
+        一个没有任何成员的集合称为空集，记为$\emptyset$.
+        \item 为了定义一个集合，可以采用枚举法或描述法
+    \end{itemize}
+\end{frame}
+
+\subsection{逻辑}
+
+\begin{frame}{逻辑量词}
+    \begin{itemize}
+        \item $\forall$: 全称量词 (for each)
+        \item $\exists$: 存在量词 (exists)
+        \item 思考：$\exists x,\forall y, P(x,y)$与$\forall y,\exists x, P(x,y)$是否相同？
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{命题逻辑}
+    \begin{itemize}
+        \item 命题的否定$(\neg)$，与$(\wedge)$，或$(\vee)$，推出$(\Rightarrow)$，等价$(\Leftrightarrow)$
+        \item 对于一个命题$P\Rightarrow Q$:
+        \begin{itemize}
+            \item 逆命题$Q\Rightarrow P$
+            \item 否命题$\neg P\Rightarrow \neg Q$ （与$\neg(P\Rightarrow Q)$比较）
+            \item \textbf{逆否命题}$\neg Q\Rightarrow \neg P$ \textit{Contrapositive}
+        \end{itemize}
+        \item $(P\Rightarrow Q) \Leftrightarrow (\neg P \vee Q)$. 为什么？
+        \item 为什么不推荐用$\because\text{和 } \therefore$？
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{等价关系}
+    \begin{itemize}
+        \item $P\Leftrightarrow Q$等价于$P\Rightarrow Q \wedge Q\Rightarrow P$
+        \item 当$P$成立，有$Q\cdots P\Rightarrow Q$
+        \item $P$成立，仅当$Q$成立$\cdots Q\Rightarrow P$
+        \item 证明\textbf{当且仅当}类命题时，一定既要证明充分性，也要证明必要性
+        \item More in SI120 / Discrete Mathematics \dots
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{反证法}
+    \begin{itemize}
+        \item 证明逆否命题法 \textit{Proof by contrapositive}
+        \begin{itemize}
+            \item 通过证明$\neg Q\Rightarrow \neg P$来证明$P\Rightarrow Q$
+        \end{itemize}
+        \item 归谬法 \textit{Proof by contradiction}
+        \begin{itemize}
+            \item 作出假设，通过数学推断得到矛盾
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{数学归纳法}
+    为了证明一个命题$P(n)$对\textbf{有限的}整数$n\ge n_0$成立，只需证明：
+    \begin{itemize}
+        \item $P(n_0)$成立$\qquad$(大多数时候，$n_0=0$或$1$)
+        \item $\forall k\ge n_0, P(k)\Rightarrow P(k+1)$
+    \end{itemize}
+    理解：多米诺骨牌
+
+    复习：习题课02
+\end{frame}
+
+\subsection{函数}
+
+\begin{frame}{定义（高中）}
+    一般地，设$A,B$是非空的\underline{\textbf{实数集}}，如果对于集合$A$中的任意一个\underline{\textbf{数}} $x$，
+    按照某种确定的对应关系$f$，在集合$B$中都有唯一确定的\underline{\textbf{数}} $y$和它对应，那么就称$f:A\rightarrow B$为
+    从集合$A$到集合$B$的一个\underline{\textbf{函数}}（function），记作
+    \[
+    y=f(x),x\in A.
+    \]
+    其中，$x$叫做自变量，$x$的取值范围$A$叫做函数的定义域（domain）；与$x$的值相对应的
+    $y$值叫做函数值，函数值的集合$\{f(x)|x\in A\}$叫做函数的值域（range）.
+\end{frame}
+
+\begin{frame}{映射}
+    设$A,B$是两个非空集合，若对$A$中的任一元素$x$，依照某种规律或法则$f$，恒有$B$中唯一确定的元素
+    $y$与之对应，则称此对应规律或法则$f$为一个从$A$到$B$的映射.记作：
+    \[
+    f:A\rightarrow B \text{ 或 }\ f:x\mapsto y
+    \]
+    我们也有$y=f(x)$.
+
+    不难看出，函数是特殊的映射.
+\end{frame}
+
+\begin{frame}{映射分类}
+    \begin{itemize}
+        \item $f$是\textbf{单射}(\textit{Injection})当且仅当$\forall a,b\in X,a\ne b\Rightarrow f(a)\ne f(b)$
+        \item $f$是\textbf{满射}(\textit{Surjection})当且仅当$\forall y\in Y,\exists x\in X,f(x)=y$
+        \item $f$是\textbf{双射}(\textit{Bijection})当且仅当$f$既是单射又是满射，此时$f$构建了一个$X$和$Y$之间的\textbf{完全一一对应}关系
+    \end{itemize}
+
+\end{frame}
+
+\subsection{实数，实数集}
+
+\begin{frame}{数集}
+    \begin{itemize}
+        \item 自然数集$\mathbb N=\{0,1,2,3,4,\dots\}$
+        \item 整数集$\mathbb Z=\{\dots,-3,-2,-1,0,1,2,3,\dots\}$
+        \item 有理数集$\mathbb Q=\{p/q|q\in \mathbb Z,q\in\mathbb N_+,\text{且}p,q\text{互质}\}$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{有理数的稠密性}
+    \[
+    \forall a,b\in\mathbb Q,\ a<b\Rightarrow \exists c\in \mathbb Q,a<c<b.
+    \]
+    可以拓展到实数集$\mathbb R$
+\end{frame}
+
+\begin{frame}{邻域}
+    一个点$x_0$的\textbf{邻域}指包含这个点的某个开区间.
+    
+    考虑“任意邻域”时，对开区间的具体大小并不关心，记为$U(x_0)$.
+    \[
+    U(x_0,\delta)=(x_0-\delta,x_0+\delta)
+    \]
+    \[
+    \dot{U}(x_0,\delta)=U(x_0,\delta) \backslash \{x_0\}=(x_0-\delta,x_0)\cup(x_0,x_0+\delta)
+    \]
+    $\dot U(x_0,\delta)$称为$x_0$的去心邻域.
+\end{frame}
+
+\begin{frame}{界}
+    对于非空实数集$E\in\mathbb R$
+    \begin{itemize}
+        \item $M$是$E$的\textbf{上界}$\Leftrightarrow\forall x\in E,x\le M$.
+        \item $m$是$E$的\textbf{下界}$\Leftrightarrow\forall x\in E,x\ge m$.
+    \end{itemize}
+    既有上界也有下界的集合是有界的.
+\end{frame}
+
+\begin{frame}{确界}
+    \begin{itemize}
+        \item $M$是$E$的\textbf{上确界}$\Leftrightarrow M$是$E$的上界且$\forall \varepsilon>0,\exists x\in E,x\ge M-\epsilon$.
+        \item $m$是$E$的\textbf{下确界}$\Leftrightarrow m$是$E$的下界且$\forall \varepsilon>0,\exists x\in E,x\le m+\epsilon$.
+    \end{itemize}
+    \vspace{1em}
+    \begin{itemize}
+        \item 思考：集合$E$中的最大、最小元素$\max E,\min E$与上、下确界$\sup E,\inf E$有什么不同？是否一致？
+    \end{itemize}
+\end{frame} 
+
+\subsection{一元实函数}
+
+\begin{frame}{单调性}
+    记$D$为函数的定义域
+    \begin{itemize}
+        \item 函数单调递增$\Leftrightarrow \forall x,y\in D, x<y\Rightarrow  f(x)\le f(y)$
+        \item 函数\textbf{严格}单调递增$\Leftrightarrow \forall x,y\in D,x<y\Rightarrow f(x) < f(y)$
+    \end{itemize}
+    注意与其他教材的区别
+\end{frame}
+
+\begin{frame}{周期性}
+    函数$f(x)$是周期函数，当且仅当
+    \[
+    \exists T\in \mathbb R, T>0,\forall x\in\mathbb D,f(x)=f(x+T)
+    \]
+    思考：$T$一定在函数的定义域（$\mathbb D$）内吗？最小正周期一定存在吗？
+\end{frame}
+
+\begin{frame}{初等函数}
+    常函数，幂函数，指数函数，对数函数
+    
+    三角函数，反三角函数，双曲三角函数
+\end{frame}
+
+\begin{frame}{方程与隐函数}
+    \begin{itemize}
+        \item 如果方程$F(x,y)=0$定义了函数$y=f(x)$，我们称$F(x,y)=0$为$y=f(x)$的\textbf{隐性定义}或\textbf{隐函数方程}.
+        \item 一个方程通常不能定义一个隐函数（例:$x^2+y^2=1$），但是方程经常在一个点的邻域定义一个隐函数.
+        \item 方程中$x$和$y$的地位是\textbf{平等}的，因此隐函数的自变量可以选$x$或$y$
+        \item 方程是否局部定义了一个函数，是重要的\textbf{隐函数定理}的内容.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{参数方程与极坐标}
+    \begin{itemize}
+        \item 有些图形可以使用$x=\varphi(t),y=\psi(t)$的方程组来描述，此时，$x,y$都是一个参数$t$的函数，给定一个确定的参数$t$，能够找到唯一一组$(x,y)$.
+        \item 消去参数$t$得到一个方程，可能定义了一个隐函数.
+    \end{itemize}
+    \vspace{1em}
+    \begin{itemize}
+        \item 极坐标系：使用$r$表示点到原点的距离，$\theta$表示点与原点连线和$x+$的夹角
+        \item 唯一确定一个点$(r,\theta) \Rightarrow (x=r\cos\theta,y=r\sin\theta)$
+        \item 一般地，约定$0\le r<+\infty,0\le\theta<2\pi$
+    \end{itemize}
+\end{frame}
+
+\section{极限与连续}
+
+\subsection{数列极限}
+
+\begin{frame}{数列极限的定义}
+    对数列$\{x_n\}$，若
+    \[
+    \exists L\in\mathbb R,\ \forall \varepsilon>0,\ \exists N\in\mathbb N,\ \forall n>N,\ |x_n-L|<\varepsilon
+    \]
+    则称数列$\{x_n\}$的\textbf{极限}为$L$，或$\{x_n\}$\textbf{收敛}于$L$，记
+    \[
+    \lim_{n\rightarrow\infty}x_n=L\qquad\text{或}\qquad x_n\rightarrow L(n\rightarrow \infty)
+    \]
+\end{frame}
+
+\begin{frame}{无穷小量与无穷大量}
+    对数列$\{x_n\}$，若
+    \[
+    \forall M>0,\ \exists N\in\mathbb N,\ \forall n>N,\ |x_n|>M
+    \]
+    则称数列$\{x_n\}$为\textbf{无穷大量}，记$\displaystyle\lim_{n\rightarrow\infty}x_n=\infty$，但实际上是\textbf{发散}到无穷大.
+    
+    若数列$\{x_n\}$的极限为$0$，称其为无穷小量.
+\end{frame}
+
+\begin{frame}{性质}
+    \begin{itemize}
+        \item 唯一性：收敛数列的极限唯一
+        \item 有界性：收敛数列是有界的
+        \item 改变/删除/增加 有限个项，数列的收敛性不变
+        \item 保序性：若$\displaystyle\lim_{n\rightarrow\infty}x_n=A>B=\lim_{n\rightarrow\infty}y_n$，
+        
+        \vspace{3pt}\hspace{3.7em}    则$\exists N\in \mathbb N,\ \forall n>N,\ x_n>y_n$
+        \item 保号性：保序性中取$y_n=0$
+        \item 归并性：$\displaystyle\lim_{n\rightarrow\infty}x_n=L\Leftrightarrow \forall \text{单增数列}\{n_k\}\subset\mathbb N,\lim_{k\rightarrow\infty}x_{n_k}=L$
+        \item 极限和四则运算的顺序可以交换    
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{判定}
+    \begin{itemize}
+        \item 夹逼定理
+        \item 单调有界数列收敛定理
+        \item 区间套定理
+    \end{itemize}
+\end{frame}
+
+\subsection{函数极限}
+
+\begin{frame}{函数极限的定义}
+    设函数在一点$a$的\textbf{去心邻域}$\dot U(a)$有定义，若
+    \[
+    \exists L\in\mathbb R,\ \forall \varepsilon >0,\ \exists \delta>0,\ \forall x\in \dot U(a,\delta),\ |f(x)-L|<\varepsilon
+    \]
+    则称当$x$趋近于$a$时，函数$f(x)$的\textbf{极限}为$L$或函数$f(x)$\textbf{收敛}于$L$，记为
+    \[
+    \lim_{x\rightarrow a}f(x)=L\qquad\text{或}\qquad f(x)\rightarrow L(x\rightarrow a)
+    \]
+\end{frame}
+
+\begin{frame}{无穷情况}
+    若函数在$|x|>X$区间内有定义，且
+    \[
+    \exists L\in\mathbb R,\ \forall \varepsilon >0,\ \exists X_0>X,\ \forall |x|>X_0,\ |f(x)-L|<\varepsilon
+    \]
+    则称当$x$趋近于$\infty$时，函数$f(x)$的\textbf{极限}为$L$或函数$f(x)$\textbf{收敛}于$L$，记为
+    \[
+    \lim_{x\rightarrow a}f(x)=L\qquad\text{或}\qquad f(x)\rightarrow L(x\rightarrow a)
+    \]
+    类似地，我们可以给出左极限、右极限、发散的定义.
+\end{frame}
+
+\begin{frame}{理解}
+    \begin{itemize}
+        \item 函数在$a$点的极限\textbf{不需要}函数在$a$点有定义 （数列在$\infty$也没有定义）
+        \item 数列的极限可以看作是$x\rightarrow +\infty$的单侧函数极限
+        \item 讨论函数的极限，一定要说明$x$趋近于$a$或$\infty$的方式（左右？正负？）
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{性质}
+    \begin{itemize}
+        \item 唯一性：在一点收敛的函数在该点的极限唯一
+        \item 局部有界性：在一点收敛的函数在该点的某邻域有界
+        \item 局部保序性：若$\displaystyle\lim_{x\rightarrow a}f(x)=A>B=\lim_{x\rightarrow a}g(x)$，
+        
+        \hspace{6em}则$\exists \delta>0,\ \forall x\in \dot U(a,\delta),\ f(x)>g(x)$.
+        \item 局部保号性：$g(x)=0$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{判定}
+    \begin{itemize}
+        \item 夹逼定理
+        \item 单调有界单侧极限存在定理
+        \item 海涅定理：
+        \[
+        \lim_{x\rightarrow a}f(x)=L\ \ \Leftrightarrow\ \  \forall \{x_n\},(\lim_{n\rightarrow\infty}x_n = a, x_n\ne a)\Rightarrow \lim_{n\rightarrow \infty}f(x_n)=L
+        \]
+        \item 海涅定理适合用于证明极限不存在，不便用于证明极限存在
+    \end{itemize}
+\end{frame}
+
+\subsection{无穷小}
+
+\begin{frame}{无穷小的定义}
+    \setstretch{1.0}
+    若$x\rightarrow a$时（$a$可能是$\infty$）,$f(x)\rightarrow0$且$g(x)\rightarrow 0$，则：
+    \begin{itemize}
+        \item $f(x)$是$g(x)$的\textbf{高阶无穷小}，记$f(x)=o(g(x))$,当且仅当\[\displaystyle\lim_{x\rightarrow a}\frac{f(x)}{g(x)}=0\]
+        \item $f(x)$是$g(x)$的\textbf{同阶无穷小}，记$f(x)=O(g(x))$,当且仅当\[\displaystyle\lim_{x\rightarrow a}\frac{f(x)}{g(x)}=c,c\ne 0\]
+        \item $f(x)$是$g(x)$的\textbf{等价无穷小}，记$f(x)\sim (g(x))$,当且仅当\[\displaystyle\lim_{x\rightarrow a}\frac{f(x)}{g(x)}=1\]
+    \end{itemize}
+\end{frame}
+
+\setstretch{1.3}
+
+\begin{frame}{无穷小的阶数}
+    若$x\rightarrow a$时，$f(x)$是与$(x-a)^k (k>0)$同阶的无穷小，我们称$f(x)$是$(x-a)$的$k$\textbf{阶无穷小}.
+
+    若$\displaystyle \lim_{x\rightarrow a}\frac{f(x)}{(x-a)^k}=c\ne0$，则称$c(x-a)^k$是$f(x)$的\textbf{主部}，此时我们有
+    \[
+    f(x)=c(x-a)^k+o((x-a)^k)
+    \]
+    乘除中的等价无穷小可以替换，加减中的等价无穷小\textbf{有条件地}替换（主部不抵消）
+\end{frame}
+
+\begin{frame}{截至目前}
+    极限的计算方法：
+    \begin{itemize}
+        \item 定义法（放缩！）
+        \item 等价无穷小替换
+        \item 夹逼（什么时候用？）
+        \item 单调有界
+    \end{itemize}
+    使用复杂的方法之前，先尽可能地\textbf{化简}！
+\end{frame}
+
+\subsection{函数的连续性}
+
+\begin{frame}{函数连续性的定义}
+    若函数$f(x)$在一点$x_0$的邻域内有定义，则$f$在该点\textbf{连续}，当且仅当函数在该点的极限存在且等于该点的函数值，即
+    \[
+    \lim_{x\rightarrow x_0}f(x)=f(x_0)
+    \]
+    或
+    \[
+    \forall \varepsilon>0,\ \exists \delta>0,\ \forall x\in (x_0-\delta,x_0+\delta),\ |f(x)-f(x_0)|<\varepsilon.
+    \]
+    将极限换为左、右极限，则得到左、右连续的定义
+
+    所有初等函数在其定义域区间内连续，在区间的端点处单侧连续
+\end{frame}
+
+\begin{frame}{间断点的分类}
+    \begin{itemize}
+        \item 第一类间断点：左、右极限都存在
+        \begin{itemize}
+            \item 左右极限相等：可去间断点，表现为从完整的函数图像上挖去了一个点
+            \item 左右极限不相等：跳跃间断点，表现为函数图像上出现了不连续的函数值变化（且变化前后都为有限值）
+        \end{itemize}
+        \item 第二类间断点：左、右极限不都存在
+        \begin{itemize}
+            \item 其中之一为无穷：无穷间断点
+            \item 极限都不为无穷，但极限也不存在：振荡间断点（典例：$\sin\frac1x$）
+        \end{itemize}
+    \end{itemize}
+    学会求间断点的值、判断间断点的类型
+\end{frame}
+
+\begin{frame}{闭区间上连续函数的性质}
+    \begin{itemize}
+        \item 有界性：闭区间上的连续函数有界
+        \item 最值存在：闭区间上的连续函数在区间上能取到最值
+        \item 介值性：最大最小值之间的任何实数都可以在区间上取到
+    \end{itemize}
+    连续函数将闭区间映射为闭区间
+\end{frame}
+
+\section{导数与微分}
+
+\subsection{定义}
+
+\begin{frame}{导数}
+    设函数$f(x)$在$x_0$的某邻域有定义，若极限
+    \[
+    \lim_{\Delta x\rightarrow 0}\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}=\lim_{x\rightarrow x_0}\frac{f(x)-f(x_0)}{x-x_0}
+    \]
+    存在，则称$f(x)$在$x_0$可导，上述极限称为该函数在$x_0$处的\textbf{导数}，记作：
+    \[
+    \begin{array}{ccc}
+        f'(x_0) \tiny\textit{(Lagrange)} & \left.\frac{\mathrm df}{\mathrm dx}\right|_{x=x_0} \tiny\textit{(Leibniz)} & \dot f(x_0) \tiny\textit{(Newton)}
+    \end{array}
+    \]
+    将上述极限换为左、右极限，得到左、右导数的定义.
+
+    可导$\Rightarrow$连续，反之不一定.（魏尔斯特拉斯函数）
+\end{frame}
+
+\begin{frame}{导函数}
+    若函数$f(x)$在区间$I$内的每一点上都可导，且在区间闭端点处单侧可导，则称函数在区间上可导，记$f\in D(I)$. 此时，称
+    \[
+    x\in I,\ f(x)\in\mathbb R;\qquad x\mapsto f'(x)
+    \]
+    $f'(x)$为$f(x)$的\textbf{导函数}，常简称为导数
+\end{frame}
+
+\begin{frame}{微分的定义}
+    设函数$f(x)$在$x_0$的某邻域有定义，若$\Delta x\rightarrow 0$时，有常数$A$使得
+    \[
+    f(x_0+\Delta x)=f(x_0)+A\cdot \Delta x + o(\Delta x)
+    \]
+    则称$f(x)$在$x_0$处\textbf{可微}，将$f(x)$在$x_0$处的微分记作$\mathrm df|_{x=x_0}=A\mathrm dx$.
+    
+    \begin{itemize}
+        \item 可微$\Leftrightarrow$可导，且$\mathrm df|_{x=x_0}=f'(x_0)\mathrm dx$
+        \item 微分与导数有区别，但对于一元实函数，类似于一个数与一个$1\times 1$矩阵的区别.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{高阶导数}
+    若导函数在{一点可导}，称函数在该点\textbf{二阶可导}，且导函数在该点的导数为\textbf{二阶导数}.如果在区间上每一点都二阶可导，就有\textbf{二阶导函数}.
+    
+    依此类推可以定义$n$阶可导$(f\in D^{(n)}(I))$、$n$阶导函数$f^{(n)}$或$\displaystyle\frac{\mathrm d^n f}{\mathrm dx^n}$
+\end{frame}
+
+\subsection{计算}
+
+\begin{frame}{导数的计算}
+    \begin{itemize}
+        \item 四则运算
+        \item 复合函数$y=f(u(x))$的链式法则$\frac{\mathrm dy}{\mathrm dx}=\frac{\mathrm dy}{\mathrm du}\frac{\mathrm du}{\mathrm dx}$
+        \item 反函数$\frac{\mathrm dy}{\mathrm dx}=1/\frac{\mathrm dx}{\mathrm dy}$
+        \item 导数表（背，或者对如何推导非常熟练）
+        \item 隐函数求导
+        \item 参数方程$\frac{\mathrm dy}{\mathrm dx}=\frac{\mathrm dy}{\mathrm dt}/\frac{\mathrm dx}{\mathrm dt}$
+    \end{itemize}
+\end{frame}
+
+\subsection{应用}
+
+\begin{frame}{科学应用}
+    \begin{itemize}
+        \item 切线斜率，曲率
+        \item 线性近似
+        \item 变化率问题
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{函数性态}
+    设函数$f$在$x_0$的邻域有定义，若
+    \[
+    \exists \delta>0,\ \forall x\in U(x_0,\delta),\ f(x)\le f(x_0)
+    \]
+    则称$f(x_0)$为函数的\textbf{极大值}，$x_0$是函数的\textbf{极大值点}.将$\le$换为$<$得到\textbf{严格极大值}的定义.换为$\ge(>)$得到（严格）极小值的定义.
+
+    \begin{itemize}
+        \item 极值点是局部概念，最值是全局概念.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{函数性态}
+    使导数等于$0$的点称为函数的\textbf{驻点}.
+
+    费马定理：
+    \begin{itemize}
+        \item $x_0$是$f(x)$的极值点，且$f(x)$在$x_0$处可导，则$x_0$是$f(x)$的驻点.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{单调性}
+    设$f(x)\in C[a,b]\cap D(a,b)$，则
+    \begin{itemize}
+        \item $f(x)$在$[a,b]$上\textbf{单调增（减）}当且仅当$f'(x)$在区间内处处非负（正），且在任何子区间上不恒为$0$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{极值}
+    设函数$f$在$x_0$某邻域上连续，在去心邻域上可导，
+    \begin{itemize}
+        \item 若$f'(x)$在$x_0$左邻域为负，右邻域为正，$x_0$是\textbf{极小值点}；
+        \item 若$f'(x)$在$x_0$左邻域为正，右邻域为负，$x_0$是\textbf{极大值点}；
+        \item 若$f'(x)$在$x_0$左右邻域同号，$x_0$不是极值点.
+    \end{itemize}
+    设函数$f$在$x_0$有二阶导数，且$f'(x_0)=0$，
+    \begin{itemize}
+        \item 若$f''(x_0)>0,x_0$是\textbf{极小值点}；
+        \item 若$f''(x_0)<0,x_0$是\textbf{极大值点}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{凸性}
+    设函数$f\in C(I)$，若
+    \[
+    \forall x_1,x_2\in I,\ \forall t\in(0,1),\ f[tx_1+(1-t)x_2]\le tf(x_1)+(1-t)f(x_2)
+    \]
+    则称函数在区间$I$上是\textbf{下凸}的.若将$\le$换成$\ge$，则称函数是\textbf{上凸}的.
+\end{frame}
+
+\begin{frame}{凸性}
+    \begin{itemize}
+        \item 设$f(x)\in D(a,b)$，若$f'(x)$在$(a,b)$上严格单调增（减），则函数在$(a,b)$上是下（上）凸的.
+        \item 设$f(x)$在$(a,b)$上二阶可导，若$f''(x)>0(<0)$，则函数在$(a,b)$上是下（上）凸的.
+    \end{itemize}
+    连续函数上凸和下凸区间的分界处称为\textbf{拐点}，该处函数的二阶导数为$0$.
+
+    More in SI251 / Convex Optimization\dots
+\end{frame}
+
+\begin{frame}{渐近线}
+    \begin{itemize}
+        \item 若$\displaystyle\lim_{x\rightarrow x_0^\pm}f(x)=\infty,\ x=x_0$是函数图像的\textbf{垂直渐近线}.（$x_0^+$或$x_0^-$）
+        \item 若$\displaystyle\lim_{x\rightarrow\pm\infty}f(x)=b,\ y=b$是函数图像的\textbf{水平渐近线}
+        \item 若$\displaystyle\lim_{x\rightarrow\pm\infty}(f(x)-ax-b)=0,\ y=ax+b$是函数图像的\textbf{斜渐近线}.
+    \end{itemize}
+    斜渐近线可以通过$a=\displaystyle\lim_{x\rightarrow\infty}\frac{f(x)}{x},b=\lim_{x\rightarrow \infty}{(f(x)-ax)}$计算
+\end{frame}
+
+\begin{frame}{画图}
+    \begin{itemize}
+        \item 定义域！！！
+        \item 奇偶性，周期性
+        \item 特殊点
+        \item （一阶导数）单调区间、极值点与极值
+        \item （二阶导数）上下凸区间、拐点与拐点处函数值
+        \item 渐近线
+    \end{itemize}
+\end{frame}
+
+% \section{特别感谢}
+
+% \begin{frame}{特别感谢}
+%     本slides中的内容较多地借鉴了数学所陈浩老师23年秋学期的讲义.
+% \end{frame}
+% -------------------------------------------------------
+\section*{}
+\begin{frame}
+\vspace{25pt}
+\[
+\text{\Huge Good luck!}
+\]
+\end{frame}
+
+\end{document}
