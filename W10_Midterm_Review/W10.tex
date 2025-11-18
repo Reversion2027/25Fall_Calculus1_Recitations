@@ -16,7 +16,7 @@
 \usepackage{extarrows}
 % \usepackage{enumitem}
 
-\setCJKmainfont{SourceHanSansSC-Regular.otf}[Path=../fonts/, BoldFont=bold.otf]
+\setCJKmainfont{SourceHanSansSC-Regular.otf}[Path=../, BoldFont=bold.otf]
 
 \setbeamerfont{title}{size=\Large}
 \setbeamerfont{subtitle}{size=\small}
@@ -504,95 +504,95 @@
     \end{itemize}
 \end{frame}
 
-\subsection{应用}
+% \subsection{应用}
 
-\begin{frame}{科学应用}
-    \begin{itemize}
-        \item 切线斜率，曲率
-        \item 线性近似
-        \item 变化率问题
-    \end{itemize}
-\end{frame}
+% \begin{frame}{科学应用}
+%     \begin{itemize}
+%         \item 切线斜率，曲率
+%         \item 线性近似
+%         \item 变化率问题
+%     \end{itemize}
+% \end{frame}
 
-\begin{frame}{函数性态}
-    设函数$f$在$x_0$的邻域有定义，若
-    \[
-    \exists \delta>0,\ \forall x\in U(x_0,\delta),\ f(x)\le f(x_0)
-    \]
-    则称$f(x_0)$为函数的\textbf{极大值}，$x_0$是函数的\textbf{极大值点}.将$\le$换为$<$得到\textbf{严格极大值}的定义.换为$\ge(>)$得到（严格）极小值的定义.
+% \begin{frame}{函数性态}
+%     设函数$f$在$x_0$的邻域有定义，若
+%     \[
+%     \exists \delta>0,\ \forall x\in U(x_0,\delta),\ f(x)\le f(x_0)
+%     \]
+%     则称$f(x_0)$为函数的\textbf{极大值}，$x_0$是函数的\textbf{极大值点}.将$\le$换为$<$得到\textbf{严格极大值}的定义.换为$\ge(>)$得到（严格）极小值的定义.
 
-    \begin{itemize}
-        \item 极值点是局部概念，最值是全局概念.
-    \end{itemize}
-\end{frame}
+%     \begin{itemize}
+%         \item 极值点是局部概念，最值是全局概念.
+%     \end{itemize}
+% \end{frame}
 
-\begin{frame}{函数性态}
-    使导数等于$0$的点称为函数的\textbf{驻点}.
+% \begin{frame}{函数性态}
+%     使导数等于$0$的点称为函数的\textbf{驻点}.
 
-    费马定理：
-    \begin{itemize}
-        \item $x_0$是$f(x)$的极值点，且$f(x)$在$x_0$处可导，则$x_0$是$f(x)$的驻点.
-    \end{itemize}
-\end{frame}
+%     费马定理：
+%     \begin{itemize}
+%         \item $x_0$是$f(x)$的极值点，且$f(x)$在$x_0$处可导，则$x_0$是$f(x)$的驻点.
+%     \end{itemize}
+% \end{frame}
 
-\begin{frame}{单调性}
-    设$f(x)\in C[a,b]\cap D(a,b)$，则
-    \begin{itemize}
-        \item $f(x)$在$[a,b]$上\textbf{单调增（减）}当且仅当$f'(x)$在区间内处处非负（正），且在任何子区间上不恒为$0$.
-    \end{itemize}
-\end{frame}
+% \begin{frame}{单调性}
+%     设$f(x)\in C[a,b]\cap D(a,b)$，则
+%     \begin{itemize}
+%         \item $f(x)$在$[a,b]$上\textbf{单调增（减）}当且仅当$f'(x)$在区间内处处非负（正），且在任何子区间上不恒为$0$.
+%     \end{itemize}
+% \end{frame}
 
-\begin{frame}{极值}
-    设函数$f$在$x_0$某邻域上连续，在去心邻域上可导，
-    \begin{itemize}
-        \item 若$f'(x)$在$x_0$左邻域为负，右邻域为正，$x_0$是\textbf{极小值点}；
-        \item 若$f'(x)$在$x_0$左邻域为正，右邻域为负，$x_0$是\textbf{极大值点}；
-        \item 若$f'(x)$在$x_0$左右邻域同号，$x_0$不是极值点.
-    \end{itemize}
-    设函数$f$在$x_0$有二阶导数，且$f'(x_0)=0$，
-    \begin{itemize}
-        \item 若$f''(x_0)>0,x_0$是\textbf{极小值点}；
-        \item 若$f''(x_0)<0,x_0$是\textbf{极大值点}.
-    \end{itemize}
-\end{frame}
+% \begin{frame}{极值}
+%     设函数$f$在$x_0$某邻域上连续，在去心邻域上可导，
+%     \begin{itemize}
+%         \item 若$f'(x)$在$x_0$左邻域为负，右邻域为正，$x_0$是\textbf{极小值点}；
+%         \item 若$f'(x)$在$x_0$左邻域为正，右邻域为负，$x_0$是\textbf{极大值点}；
+%         \item 若$f'(x)$在$x_0$左右邻域同号，$x_0$不是极值点.
+%     \end{itemize}
+%     设函数$f$在$x_0$有二阶导数，且$f'(x_0)=0$，
+%     \begin{itemize}
+%         \item 若$f''(x_0)>0,x_0$是\textbf{极小值点}；
+%         \item 若$f''(x_0)<0,x_0$是\textbf{极大值点}.
+%     \end{itemize}
+% \end{frame}
 
-\begin{frame}{凸性}
-    设函数$f\in C(I)$，若
-    \[
-    \forall x_1,x_2\in I,\ \forall t\in(0,1),\ f[tx_1+(1-t)x_2]\le tf(x_1)+(1-t)f(x_2)
-    \]
-    则称函数在区间$I$上是\textbf{下凸}的.若将$\le$换成$\ge$，则称函数是\textbf{上凸}的.
-\end{frame}
+% \begin{frame}{凸性}
+%     设函数$f\in C(I)$，若
+%     \[
+%     \forall x_1,x_2\in I,\ \forall t\in(0,1),\ f[tx_1+(1-t)x_2]\le tf(x_1)+(1-t)f(x_2)
+%     \]
+%     则称函数在区间$I$上是\textbf{下凸}的.若将$\le$换成$\ge$，则称函数是\textbf{上凸}的.
+% \end{frame}
 
-\begin{frame}{凸性}
-    \begin{itemize}
-        \item 设$f(x)\in D(a,b)$，若$f'(x)$在$(a,b)$上严格单调增（减），则函数在$(a,b)$上是下（上）凸的.
-        \item 设$f(x)$在$(a,b)$上二阶可导，若$f''(x)>0(<0)$，则函数在$(a,b)$上是下（上）凸的.
-    \end{itemize}
-    连续函数上凸和下凸区间的分界处称为\textbf{拐点}，该处函数的二阶导数为$0$.
+% \begin{frame}{凸性}
+%     \begin{itemize}
+%         \item 设$f(x)\in D(a,b)$，若$f'(x)$在$(a,b)$上严格单调增（减），则函数在$(a,b)$上是下（上）凸的.
+%         \item 设$f(x)$在$(a,b)$上二阶可导，若$f''(x)>0(<0)$，则函数在$(a,b)$上是下（上）凸的.
+%     \end{itemize}
+%     连续函数上凸和下凸区间的分界处称为\textbf{拐点}，该处函数的二阶导数为$0$.
 
-    More in SI251 / Convex Optimization\dots
-\end{frame}
+%     More in SI251 / Convex Optimization\dots
+% \end{frame}
 
-\begin{frame}{渐近线}
-    \begin{itemize}
-        \item 若$\displaystyle\lim_{x\rightarrow x_0^\pm}f(x)=\infty,\ x=x_0$是函数图像的\textbf{垂直渐近线}.（$x_0^+$或$x_0^-$）
-        \item 若$\displaystyle\lim_{x\rightarrow\pm\infty}f(x)=b,\ y=b$是函数图像的\textbf{水平渐近线}
-        \item 若$\displaystyle\lim_{x\rightarrow\pm\infty}(f(x)-ax-b)=0,\ y=ax+b$是函数图像的\textbf{斜渐近线}.
-    \end{itemize}
-    斜渐近线可以通过$a=\displaystyle\lim_{x\rightarrow\infty}\frac{f(x)}{x},b=\lim_{x\rightarrow \infty}{(f(x)-ax)}$计算
-\end{frame}
+% \begin{frame}{渐近线}
+%     \begin{itemize}
+%         \item 若$\displaystyle\lim_{x\rightarrow x_0^\pm}f(x)=\infty,\ x=x_0$是函数图像的\textbf{垂直渐近线}.（$x_0^+$或$x_0^-$）
+%         \item 若$\displaystyle\lim_{x\rightarrow\pm\infty}f(x)=b,\ y=b$是函数图像的\textbf{水平渐近线}
+%         \item 若$\displaystyle\lim_{x\rightarrow\pm\infty}(f(x)-ax-b)=0,\ y=ax+b$是函数图像的\textbf{斜渐近线}.
+%     \end{itemize}
+%     斜渐近线可以通过$a=\displaystyle\lim_{x\rightarrow\infty}\frac{f(x)}{x},b=\lim_{x\rightarrow \infty}{(f(x)-ax)}$计算
+% \end{frame}
 
-\begin{frame}{画图}
-    \begin{itemize}
-        \item 定义域！！！
-        \item 奇偶性，周期性
-        \item 特殊点
-        \item （一阶导数）单调区间、极值点与极值
-        \item （二阶导数）上下凸区间、拐点与拐点处函数值
-        \item 渐近线
-    \end{itemize}
-\end{frame}
+% \begin{frame}{画图}
+%     \begin{itemize}
+%         \item 定义域！！！
+%         \item 奇偶性，周期性
+%         \item 特殊点
+%         \item （一阶导数）单调区间、极值点与极值
+%         \item （二阶导数）上下凸区间、拐点与拐点处函数值
+%         \item 渐近线
+%     \end{itemize}
+% \end{frame}
 
 % \section{特别感谢}
 
