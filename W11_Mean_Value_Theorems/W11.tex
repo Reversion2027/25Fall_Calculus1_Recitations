@@ -1,0 +1,487 @@
+\documentclass[]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{utopia} %font utopia imported
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+\usefonttheme{professionalfonts}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{extarrows}
+% \usepackage{enumitem}
+
+\setCJKmainfont{SourceHanSansSC-Regular.otf}[Path=../fonts/, BoldFont=bold.otf]
+
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{institute}{size=\small}
+
+\setstretch{1.3}
+% \setlength{\parindent}{2em}
+% \setlength{\parskip}{0pt}
+
+% \setlist[itemize]{leftmargin=2em}
+
+% ↓↓↓ Modify this ↓↓↓
+\title{高等数学I\quad 习题课11}
+\subtitle{微分中值定理}
+\date[2025.11.27]{2025.11.27}
+% ↑↑↑ Modify this ↑↑↑
+
+\author[上海科技大学]{}
+\institute[]{上海科技大学}
+
+\begin{document}
+
+\begin{frame}
+    \vspace{15pt}
+    \titlepage
+\end{frame}
+
+% \begin{frame}{习题课09 反馈}
+%     \begin{columns}
+%         % 左栏：文字
+%         \begin{column}{0.5\textwidth}
+%             \begin{figure}[H]
+%                 \centering
+%                 \includegraphics[width=1.0\linewidth]{fb1.png}
+%                 \caption{课程质量}
+%             \end{figure}
+%         \end{column}
+
+%         \begin{column}{0.5\textwidth}
+%             \begin{figure}[H]
+%                 \centering
+%                 \includegraphics[width=1.0\linewidth]{fb2.png}
+%                 \caption{课堂氛围}
+%             \end{figure}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
+
+% \begin{frame}{后续安排（暂定）}
+%     \begin{itemize}
+%         \item W11 微分中值定理
+%         \item W12 微分中值定理\ 函数性态的研究
+%         \item W13 定积分及其性质\ 积分中值定理
+%         \item W14 不定积分\ 定积分的计算
+%         \item W15 反常积分\ 级数
+%         \item W16 级数
+%         \item （模拟卷讲评+期末复习？）
+%     \end{itemize}
+% \end{frame}
+
+% \begin{frame}{作业提交}
+%     如果match错误，助教需要在如下图片中找到你的作业：
+%     \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=1.0\linewidth]{hwhandin.png}
+%     \end{figure}
+%     Gradescope似乎不会把逐张提交的png图片按照题目顺序排序\dots
+% \end{frame}
+
+
+\begin{frame}{目录}
+    \vfill
+    \tableofcontents[hideallsubsections]
+    \vfill
+\end{frame}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{目录}
+    \vfill
+    \tableofcontents[currentsection,hideallsubsections]
+    \vfill
+\end{frame}
+}
+
+\section{微分中值定理}
+
+\subsection{费马定理}
+
+\begin{frame}{费马定理}
+    设函数$f(x)$在点$x_0$取得极值，且$f(x)$在$x_0$可导，则$f'(x_0)=0$.
+
+    \begin{itemize}
+        \item 导数值为$0$的点称为函数的\textbf{驻点}.
+        \item 驻点一定是极值点吗？
+    \end{itemize}
+\end{frame}
+
+\subsection{罗尔定理}
+
+\begin{frame}{罗尔定理}
+    设函数$f(x)$满足：
+    \begin{itemize}
+        \item 在闭区间$[a,b]$上连续
+        \item 在开区间$(a,b)$上可导
+        \item $f(a)=f(b)$
+    \end{itemize}
+    则$\exists \xi\in(a,b)$，使得
+    \[
+    f'(\xi)=0.
+    \]
+    \begin{itemize}
+        \item 尝试用数学语言，一句话写出罗尔定理
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{推论}
+    若$f(x)\in C[a,b]\cap D(a,b)$，且在开区间$(a,b)$内，$f'(x)\ne 0$，则$y=f(x)$在闭区间$[a,b]$上是单射函数，从而必存在反函数.
+\end{frame}
+
+\begin{frame}{例}
+    设函数$f(x)\in C[a,b]$，在$(a,b)$内可导，且$f(a)=f(b)=0$，试证：
+    \[
+    \exists\ \xi\in (a,b),\ \text{s.t.}\ f'(\xi)=f(\xi)
+    \]
+\end{frame}
+
+\begin{frame}{思路}
+    设函数$f(x)\in C[a,b]$，在$(a,b)$内可导，且$f(a)=f(b)=0$，试证$\exists\ \xi\in (a,b),\ \text{s.t.}\ f'(\xi)=f(\xi)$.
+
+    \begin{itemize}
+        \item 导数与原函数之间的性质可以通过中值定理连接
+        \item $f(a)=f(b)=0$，满足罗尔定理的使用条件，而$f'(\xi)-f(\xi)=0$
+        \item 若能找到某个函数$F(x)$，使得$F'(x)=0 \Leftrightarrow f'(\xi)-f(\xi)=0$，得证
+        \item $f'-f$并不像某个函数的导数，但可能是形如$f'g+fg'$进行约简后的结果\dots$\ \Rightarrow\ $
+            找$g(x)$，使得$g'(x)=-g(x)$
+        \item $g(x)=e^{-x}\Rightarrow F(x)=f(x)e^{-x}$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{练习}
+    设函数$f(x)$在区间$[a,+\infty)$上连续，在开区间$(a,+\infty)$内可导，$a$是常数，$\lim\limits_{x\rightarrow +\infty}f(x)=f(a)$. 证明：
+    \[
+    \exists \ \xi\in (a,+\infty),\ \text{s.t.}\ f'(\xi)=0.
+    \]
+\end{frame}
+
+\begin{frame}{思考题 1: 课本 例4.6}
+    设$f(x)$在$[1,+\infty)$上可导，且$f(x)$有界，$f(1)=0$，证明：
+    \[
+    \exists\ \xi\in(1,+\infty),\ \text{s.t.}\ \xi f'(\xi)-f(\xi)=0.
+    \]
+    
+    \begin{itemize}
+        \item 提示：
+        \begin{itemize}
+            \item 题目只给了$f(1)=0$，而既没有给出某处$f(x_0)=0$，也没有给出$\lim\limits_{x\rightarrow \infty}f(x)=0$，
+            反而是给出了$f(x)$有界. 这个条件要怎么利用？
+            \item $\xi f'(\xi)-f(\xi)$看起来像某个函数的导数吗？不像的话，该怎么变换？
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{拉格朗日定理}
+
+\begin{frame}{拉格朗日定理}
+    设函数$f(x)$满足：
+    \begin{itemize}
+        \item 在闭区间$[a,b]$连续
+        \item 在开区间$(a,b)$可导
+    \end{itemize}
+    则
+    \[
+    \exists\ \xi\in(a,b),\ \text{s.t.}\ f'(\xi)=\frac{f(b)-f(a)}{b-a}.
+    \]
+    不难看出，罗尔定理是拉格朗日定理的特殊形式.
+\end{frame}
+
+\begin{frame}{几何理解}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{lagrange.png}
+        \caption{课本 P159 图4.4}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{证明}
+    构造
+    \[
+    F(x)=f(x)-\frac{f(b)-f(a)}{b-a}(x-a)
+    \]
+    则
+    \[
+    F(a)=F(b)=f(a) \Rightarrow \exists\ \xi\in(a,b),\ F'(\xi)=0.
+    \]
+    怎么想到的？
+\end{frame}
+
+\begin{frame}{几何理解...不止于此！}
+    一辆小车从$(a,f(a))$点出发，最终达到$(b,f(b))$点.
+    \begin{itemize}
+        \item 小车沿$AB$运动，则以上定理对所有$\xi\in(a,b)$成立.
+        \item 小车不完全沿$AB$运动：
+        \begin{itemize}
+            \item 记小车在$y$方向上偏离直线$AB$的距离为$h(x)$.
+            \item $h(x)$可能会随着小车行驶增加或减少，但一定有$h(a)=h(b)=0$.
+            \item 同时，$h(x)$在小车行驶过程中一定会取到极（最）值：\textbf{最值定理}
+        \end{itemize}
+    \end{itemize}
+    依照以上思路，可以完成拉格朗日定理的证明.
+\end{frame}
+
+\begin{frame}{其他形式}
+    \[
+    f(b)-f(a)=f'(\xi)(b-a)
+    \]
+    \[
+    f(x_0+\Delta x)-f(x_0)=f'(x_0+\theta\Delta x)\Delta x,\quad\theta\in(0,1)
+    \]
+\end{frame}
+
+\begin{frame}{推论}
+    \begin{enumerate}
+        \item 设函数$f(x)$在区间$I$上可导，且$f'(x)\equiv 0$，则$f(x)$在$I$上等于一常数.
+        \item 设函数$f(x)$和$g(x)$在区间$I$上导数处处相等，则$f(x)$与$g(x)$在$I$上相差一常数.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{例}
+    设函数$f(x)$在$[0,1]$上可导，且$0<f(x)<1$，又$\forall\ x\in(0,1)$，$f'(x)\ne1$，试证：在$(0,1)$内函数$f(x)$有\textbf{唯一}的不动点，即方程
+    \[
+    f(x)=x
+    \]
+    有\textbf{唯一}的实根.
+\end{frame}
+
+\begin{frame}{思考题 2: 课本 例4.11}
+    设函数$f(x)$在区间$[a,+\infty)$上可导，且$\lim\limits_{x\rightarrow+\infty}f'(x)=A>0$，试证：
+    \[
+    \lim_{x\rightarrow +\infty}f(x)=+\infty.
+    \]
+    \begin{itemize}
+        \item 提示：
+        \begin{itemize}
+            \item 命题在直觉上成立. 如何进行导数向函数值的变换？
+            \item 当想不到能做些什么时，先尝试能如何将手边的条件利用起来：\\凑项，定义展开，\dots
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{柯西定理}
+
+\begin{frame}{柯西定理}
+    设函数$f(t)$和$g(t)$满足：
+    \begin{itemize}
+        \item 在闭区间$[a,b]$连续
+        \item 在开区间$(a,b)$可导，且$\forall\ t\in(a,b),\ g'(t)\ne0$
+    \end{itemize}
+    则
+    \[
+    \exists\ \xi\in(a,b),\ \text{s.t.}\ \frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\xi)}{g'(\xi)}.
+    \]
+    不难看出，拉格朗日定理是柯西定理的特殊形式.
+\end{frame}
+
+\begin{frame}{几何理解}
+    
+    \begin{itemize}
+        \item 记$x=g(t),y=f(t)$为以$t$为参数的参数方程定义的曲线.
+        \item 等式左端等价于$(y_b-y_a)/(x_b-x_a)$，其几何意义为$A=(x_a,y_a),B=(x_b,y_b)$两点间连线的斜率
+        \item 等式右端等价于$\frac{\mathrm dy}{\mathrm dt}/\frac{\mathrm dx}{\mathrm dt}=\frac{\mathrm dy}{\mathrm dx}$在$t=\xi$处的取值，
+        其几何意义为$(x_\xi,y_\xi)$处的切线斜率
+    \end{itemize}
+    $\Rightarrow$割线与切线斜率相等
+\end{frame}
+
+\begin{frame}{例}
+    设函数$f(x)$在$[a,b]$上连续，在$(a,b)$内可导$(a>0)$，证明：
+    \[
+    \exists\ \xi,\eta\in(a,b),\ \text{s.t.}\ abf'(\xi)=\eta^2f'(\eta)
+    \]
+    \begin{itemize}
+        \item 提示：
+        \begin{itemize}
+            \item 找找$g(x)$？
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{导函数的性质}
+
+\begin{frame}{达布定理}
+    若函数$f(x)$在闭区间$[a,b]$上可导，且$f'_+(a)<f'_-(b)$，则
+    \[
+    \forall\ c\in(f'_-(a),f'_+(b)),\ \exists\ \xi\in(a,b),\ \text{s.t.}\ f'(\xi)=c.
+    \]
+    导函数即使不连续，也有介值性
+\end{frame}
+
+\begin{frame}{导函数的极限}
+    设$\delta > 0$，函数$f(x)$在$[x_0,x_0+\delta)$上连续，在$(x_0,x_0+\delta)$内可导，若$\lim\limits_{x\rightarrow x_0^+}f'(x)=A$存在，则
+    $f(x)$在点$x_0$有右导数，且$f_+'(x_0)=A$.
+
+    \begin{itemize}
+        \item 修改所有与右导数相关的内容为左导数，命题依然成立.
+        \item 即，若函数在某点的单侧邻域内连续且可导，则该点的单侧导数存在且等于到函数的极限.
+    \end{itemize}
+\end{frame}
+
+\section{洛必达法则}
+
+\begin{frame}{洛必达法则}
+    设函数$f(x)$和$g(x)$在点$x_0$的某个去心邻域$\dot U(x_0,\delta)$内有定义，且满足：
+    \begin{itemize}
+        \item $\lim\limits_{x\rightarrow x_0} f(x)=0,\lim\limits_{x\rightarrow x_0} g(x)=0$
+        \item $f(x)$，$g(x)$在该去心邻域内可导，且$g'(x)\ne 0$
+        \item $\displaystyle\lim_{x\rightarrow x_0}\frac{f'(x)}{g'(x)}=A$（$A$为常数或$\infty$）
+    \end{itemize}
+    则
+    \[
+    \lim_{x\rightarrow x_0}\frac{f(x)}{g(x)}=\lim_{x\rightarrow x_0}\frac{f'(x)}{g'(x)}=A
+    \]
+\end{frame}
+
+\begin{frame}{几何理解}
+    \url{https://www.bilibili.com/video/BV1qW411N7FU/?p=7}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.9\textwidth]{3b1b.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{几何理解}
+    \begin{itemize}
+        \item 函数可导，意味着在该点附近，函数可以近似地被视为直线
+        \item 取一小段距离$\mathrm dx$，得到函数值对应的变化$\mathrm df,\mathrm dg$
+        \item $\mathrm df/\mathrm dg$可以作为一个$f(x)/g(x)$在该点附近的近似值
+        \item 取$\mathrm dx\rightarrow 0$，极限即为该处$f(x)/g(x)$的极限值
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{思考}
+    洛必达法则的第二项条件：
+    \begin{itemize}
+        \item $f(x)$，$g(x)$在该去心邻域内可导，且$g'(x)\ne 0$
+    \end{itemize}
+    那么，为什么在进行一次洛必达法则运用后，若依然得到$0/0$式，还可以继续运用？此时难道不是$g(x)=0$吗？
+    \begin{itemize}
+        \item 此时仅有$g(x_0)=0$，而$x_0$不在极限运算的定义域内.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{洛必达法则}
+    设函数$f(x)$和$g(x)$在点$x_0$的某个去心邻域$\dot U(x_0,\delta)$内有定义，且满足：
+    \begin{itemize}
+        \item $\lim\limits_{x\rightarrow x_0} g(x)=\infty$
+        \item $f(x)$，$g(x)$在该去心邻域内可导，且$g'(x)\ne 0$
+        \item $\displaystyle\lim_{x\rightarrow x_0}\frac{f'(x)}{g'(x)}=A$（$A$为常数或$\infty$）
+    \end{itemize}
+    则
+    \[
+    \lim_{x\rightarrow x_0}\frac{f(x)}{g(x)}=A
+    \]
+\end{frame}
+
+\begin{frame}{例}
+    求
+    \begin{align*}
+        \lim_{x\rightarrow -\infty}\frac{x}{\sqrt{1+x^2}}
+    \end{align*}
+\end{frame}
+
+\begin{frame}{“典”例}
+    \begin{align*}
+        \lim_{x\rightarrow 0}\frac{x^2\sin\frac1x}{\sin x}&=\lim_{x\rightarrow 0}\frac{2x\sin\frac1x-\cos\frac1x}{\cos x}\\
+        &=\lim_{x\rightarrow 0}\frac{2x\sin\frac1x}{\cos x}-\lim_{x\rightarrow 0}\frac{\cos\frac1x}{\cos x}
+    \end{align*}
+    第一项极限为$0$，第二项极限不存在，故该极限不存在.
+\end{frame}
+
+\begin{frame}{投票}
+    
+\end{frame}
+
+\begin{frame}{使用原则}
+    \begin{itemize}
+        \item 洛必达法则的本质：
+        \begin{itemize}
+            \item 函数在$x=x_0$处的比值\ 等价于\\ 函数在$\dot U(x_0)$内近似直线斜率的比值在$x\rightarrow x_0$时的极限
+            \item 与泰勒公式等价
+        \end{itemize}
+        \item 使用原则：
+        \begin{itemize}
+            \item 使用前先尽可能化简
+            \item 确保条件均成立：\\0/0或$\infty/\infty$，去心邻域内可导，上下求导后极限存在
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\section{泰勒公式}
+
+\begin{frame}{泰勒定理 1}
+    设函数$f(x)$在点$x_0$的邻域内有定义，且在$x_0$有$n$阶导数，那么
+    \[
+    f(x)=f(x_0)+f'(x_0)(x-x_0)+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+o((x-x_0)^n)
+    \]
+    其中$o((x-x_0)^n)$称为佩亚诺余项，定理结论称为$f(x)$的带佩亚诺余项的$n$阶泰勒公式.
+    
+    一个确定函数的泰勒公式中，多项式的系数是确定的.
+\end{frame}
+
+\begin{frame}{几何意义}
+    对$e^x$进行$0$处的多项式估计
+    \[
+    e^x=1+x+\frac{1}{2}x^2+\frac{1}{3!}x^3+\frac{1}{4!}x^4+\cdots+\frac{1}{n!}x^{n}+o(x^n)
+    \]
+\end{frame}
+
+\begin{frame}{泰勒定理 2}
+    设函数$f(x)$在包含点$x_0$的开区间$(a,b)$内具有$n+1$阶导数，则$\forall x\in(a,b)$，有 
+    \[
+    f(x)=f(x_0)+f'(x_0)(x-x_0)+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}
+    \]
+    其中$\xi$介于$x_0$与$x$之间.
+
+    $\displaystyle\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}$称为拉格朗日余项.
+    
+\end{frame}
+
+\begin{frame}{麦克劳林公式}
+    在$0$处的泰勒公式. 课本P176$\sim$177
+\end{frame}
+
+\begin{frame}{例 (23Fall, Midterm)}
+    求$\sqrt{1+\sin x}$带佩亚诺余项的3阶麦克劳林公式.
+\end{frame}
+
+\begin{frame}{思考题 3：课本 例4.36}
+    设$f(x)$在$[0,1]$上二阶可导，且$\max\limits_{0<x<1}f(x)=1/4$，$|f''(x)|\le1$，试证：
+    \[
+    |f(0)|+|f(1)|<1.
+    \]
+    \begin{itemize}
+        \item 提示：
+        \begin{itemize}
+            \item 当你没有思路的时候，尝试利用手边的条件做点什么（随便什么）
+            \item 要证$|f(0)|+|f(1)|<1$，需要对函数值的绝对值进行限制. 题目给定的条件要如何与函数值联系起来？
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+% -------------------------------------------------------
+% \section*{}
+% \begin{frame}{反馈问卷}
+%     \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.5\linewidth]{qrcode.png}
+%     \end{figure}
+% \end{frame}
+% \begin{frame}
+% \vspace{25pt}
+% \[
+% \text{\Huge }
+% \]
+% \end{frame}
+
+\end{document}
