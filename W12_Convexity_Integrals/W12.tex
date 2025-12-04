@@ -1,0 +1,449 @@
+\documentclass[]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{mathtools}
+\usepackage{utopia} %font utopia imported
+\usetheme{CambridgeUS}
+\usecolortheme{dolphin}
+\usefonttheme{professionalfonts}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{extarrows}
+% \usepackage{enumitem}
+
+\setCJKmainfont{SourceHanSansSC-Regular.otf}[Path=../, BoldFont=bold.otf]
+
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{subtitle}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{institute}{size=\small}
+
+\setstretch{1.3}
+% \setlength{\parindent}{2em}
+% \setlength{\parskip}{0pt}
+
+% \setlist[itemize]{leftmargin=2em}
+
+% ↓↓↓ Modify this ↓↓↓
+\title{高等数学I\quad 习题课12}
+\subtitle{函数性态的研究，不定积分}
+\date[2025.12.4]{2025.12.4}
+% ↑↑↑ Modify this ↑↑↑
+
+\author[上海科技大学]{}
+\institute[]{上海科技大学}
+
+\begin{document}
+
+\begin{frame}
+    \vspace{15pt}
+    \titlepage
+\end{frame}
+
+% \begin{frame}{习题课11 反馈}
+%     \begin{columns}
+%         \begin{column}{0.5\textwidth}
+%             \begin{figure}[H]
+%                 \centering
+%                 \includegraphics[width=1.0\linewidth]{fb1.png}
+%                 \caption{课程质量}
+%             \end{figure}
+%         \end{column}
+
+%         \begin{column}{0.5\textwidth}
+%             \begin{figure}[H]
+%                 \centering
+%                 \includegraphics[width=1.0\linewidth]{fb2.png}
+%                 \caption{课堂氛围}
+%             \end{figure}
+%         \end{column}
+%     \end{columns}
+% \end{frame}
+
+\begin{frame}{关于后续习题课}
+    \begin{itemize}
+        \item 根据期中考试成绩反馈，我们会在习题课上尽可能地增加基础运算的练习
+        \item 关于几何直观，请大家观看3Blue1Brown的视频：
+        \item \url{https://www.bilibili.com/video/BV1qW411N7FU}
+        \item 如果时间足够，我们会尽可能地提供几何直观的讲解
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{目录}
+    \vfill
+    \tableofcontents[hideallsubsections]
+    \vfill
+\end{frame}
+
+\AtBeginSection[ ]
+{
+\begin{frame}{目录}
+    \vfill
+    \tableofcontents[currentsection,hideallsubsections]
+    \vfill
+\end{frame}
+}
+
+\section{函数性态的研究}
+
+\subsection{单调性}
+
+\begin{frame}{定理4.11,4.12}
+    设函数$f(x)\in C[a,b]\cap D(a,b)$，则$f(x)$在$(a,b)$上单调增加的充分必要条件是：
+    \[
+    \forall x\in(a,b),\quad f'(x)\ge 0
+    \]
+    若要求$f(x)$在$(a,b)$上严格单调增加，则还要求在$(a,b)$的任何子区间上，$f'(x)$不恒等于$0$.
+\end{frame}
+
+\begin{frame}{例4.37}
+    求$f(x)=2x^3-9x^2+12x-3$的单调区间.
+\end{frame}
+
+\begin{frame}{例4.40}
+    证明：当$x>0$时，$\displaystyle x-\frac{x^3}{6}<\sin x<x$.
+\end{frame}
+
+\subsection{极值与最值}
+
+\begin{frame}{极值第一判别法}
+    设函数$f(x)$在点$x_0$的某个邻域内$U(x_0,\delta)$连续，且在去心邻域内可导，
+    \begin{itemize}
+        \item [(1)] 若在$x_0$左侧$f'(x_0)<0$，$x_0$右侧$f'(x_0)>0$，则$x_0$是$f(x)$的极小值点；
+        \item [(2)] 若在$x_0$左侧$f'(x_0)>0$，$x_0$右侧$f'(x_0)<0$，则$x_0$是$f(x)$的极大值点；
+        \item [(3)] 若在$x_0$两侧$f'(x_0)$同号，则$x_0$不是$f(x)$的极值点.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{极值第二判别法}
+    设函数$f(x)$在点$x_0$有二阶导数，且$f'(x_0)=0$，则
+    \begin{itemize}
+        \item [(1)] 若$f'(x_0)<0$，则$x_0$是$f(x)$的极大值点；
+        \item [(2)] 若$f'(x_0)>0$，则$x_0$是$f(x)$的极小值点；
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{例4.45}
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            设有一块边长为$a$ m的正方形铁皮，在它的四个角上各剪去一个相同边长的小正方形，然后将它沿虚线折起（如图），做成一个无盖的铁盒子. 
+            问剪去的小正方形边长$x$为多少米时，能使盒子的容积最大，并求其最大容积.
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{fig4.5.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\subsection{凸性}
+
+\begin{frame}{定义}
+    设函数$f(x)$在区间$I$连续，若
+    \[
+    \forall x_1,x_2\in I,\theta\in(0,1),\quad f\Big(\theta x_1+(1-\theta)x_2\Big)\le \theta f(x_1)+(1-\theta)f(x_2),
+    \]
+    则称函数$f$在该区间上是下凸的(\textit{convex}).
+
+    若将$\le$换为$\ge$，则称$f$在该区间上是上凸的(\textit{concave}).
+
+    若将$\le$换为$<$，则称$f$是严格下凸的.
+\end{frame}
+
+\begin{frame}{图解}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1.0\textwidth]{convex.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{应用}
+    思考：如果一个函数在整个定义域上都是下凸的，那么这个函数有几个极值点？
+\end{frame}
+
+\begin{frame}{第一判别法}
+    设函数$f(x)$在区间$(a,b)$内可导，若导函数$f'(x)$在$(a,b)$内严格单调增加（减少），则该函数在$(a,b)$内是严格下凸（上凸）的.
+\end{frame}
+
+\begin{frame}{一阶条件}
+    \[
+    f(x)\ \text{convex}\quad\Leftrightarrow\quad \forall x,y\in I,f(y)\ge f(x)+f'(x)(y-x)
+    \]
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1.0\textwidth]{convex_1.png}
+    \end{figure}
+    Image from SI251, Convex Optimization
+\end{frame}
+
+\begin{frame}{二阶条件}
+    设函数$f(x)$在$(a,b)$内二阶可导，则当$f''(x)>0$时，$f(x)$在$(a,b)$内下凸；当$f''(x)<0$时，$f(x)$在$(a,b)$内上凸.
+\end{frame}
+
+\subsection{渐近线}
+
+\begin{frame}{定义}
+    若连续曲线$C$上的点$P$沿着曲线无限地远离原点$O$时，点$P$与某一定直线$L$的距离趋于零，即$\lim\limits_{|OP|\rightarrow\infty}\text{dist} (P,L)=0$，则称直线$L$为曲线$C$的渐近线
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{jianjinxian.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{分类}
+    \begin{itemize}
+        \item 铅直渐近线
+        \item 水平渐近线
+        \item 斜渐近线
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{铅直渐近线}
+    若当$x\rightarrow x_0$（或$x_0^+,x_0^-$）时，$f(x)\rightarrow \infty$，即
+    \[
+    \lim_{x\rightarrow x_0}f(x)=\infty,
+    \]
+    则称$x=x_0$是曲线$y=f(x)$的铅直渐近线.
+\end{frame}
+
+\begin{frame}{水平渐近线}
+   若当$x\rightarrow \infty$（或$+\infty,-\infty$）时，$f(x)\rightarrow b$，即
+   \[
+   \lim_{x\rightarrow\infty}f(x)=b,
+   \] 
+   则称直线$y=b$是曲线$y=f(x)$的水平渐近线.
+\end{frame}
+
+\begin{frame}{斜渐近线}
+    若当$x\rightarrow \infty$（或$+\infty,-\infty$）时，曲线$y=f(x)$与直线$y=ax+b$的距离趋于$0$，即
+    \[
+    \lim_{x\rightarrow\infty}(f(x)-ax-b)=0,
+    \]
+    则$y=ax+b$是曲线$y=f(x)$的斜渐近线
+\end{frame}
+
+\begin{frame}{例 (24Fall Midterm, 14)}
+    全面讨论函数
+    \[
+    f(x)=(x+2)e^{1/x}
+    \]
+    的性态（定义域与值域、间断点、零点、单调区间、极值点、上下凸区间、拐点、渐近线）
+    
+    并作草图.
+\end{frame}
+
+\section{不定积分}
+
+\begin{frame}{Motivation}
+    先前我们利用导数做了：
+    \begin{itemize}
+        \item 给定汽车行驶的距离，得到车的“瞬时速度”
+    \end{itemize}
+    现在我们关心这个问题的逆过程：
+    \begin{itemize}
+        \item 假设你坐在车里，看不到外界的情况，但是能看到仪表盘
+        \item 你要怎样通过已有的信息，得到汽车已经行驶过的距离？
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{数学原理分析}
+    已知速度函数$v(t)$，希望找到距离函数$s(t)$.
+
+    已知关系：
+    \[
+    v(t)=\frac{\mathrm ds}{\mathrm dt}
+    \]
+\end{frame}
+
+\begin{frame}{原函数的定义}
+    课本P232, 定义5.2
+
+    设函数$f(x)$在区间$I$上有定义，若存在函数$F(x)$使得
+    \[
+    F'(x)=f(x),
+    \]
+    则称函数$F(x)$是$f(x)$在$I$上的\textbf{一个}原函数.
+
+    若一个函数有原函数，则其必有无穷多个原函数. 我们称$F(x)+C$（$C$为任意常数）为$f(x)$的全体原函数.
+\end{frame}
+
+\begin{frame}{不定积分的定义}
+    设函数$f(x)$在区间$I$上存在原函数，则称$f(x)$在$I$上的\textbf{全体}原函数为$f(x)$在$I$上的不定积分，记作
+    \[
+    \int f(x)\mathrm dx
+    \]
+    其中记号$\int$称为不定积分号，$f(x)$为被积函数，$x$称为积分变量.
+
+    由原函数的定义立即得
+    \[
+    \int f(x)\mathrm dx = F(x)+C
+    \]
+    其中$C$为任意常数，也称为不定积分常数.
+\end{frame}
+
+\begin{frame}{重要定理 1 (不定积分的导数)}
+    若函数$f(x)$在区间$I$上存在原函数，则
+    \[
+    \Big(\int f(x)\mathrm dx\Big)'=f(x)
+    \]
+    或，等价地，
+    \[
+    \mathrm d\Big(\int f(x)\mathrm dx\Big)=f(x)
+    \]
+\end{frame}
+
+\begin{frame}{重要定理 2 (导数的不定积分)}
+    若函数$f(x)$在区间$I$上可导，则
+    \[
+    \int f'(x)\mathrm dx=f(x)+C，
+    \]
+    或，等价地，
+    \[
+    \int \mathrm d f(x)=f(x)+C
+    \]
+\end{frame}
+
+\begin{frame}{重要定理 3 (线性)}
+    若函数$f(x),g(x)$在区间$I$上都存在原函数，$\alpha,\beta\in\mathbb R$且不同时为零，则
+    \[
+    \int [\alpha f(x)+\beta g(x)]\mathrm dx=\alpha \int f(x)\mathrm dx+\beta\int g(x)\mathrm dx
+    \]
+\end{frame}
+
+\begin{frame}{基本积分表，课本P241}
+    背，或者学会如何推导
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{int1.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{int2.png}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.9\textwidth]{int3.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{简例}
+    求不定积分
+    \[
+    \int (3\sqrt x-2e^x+\frac{1}{\sqrt x}-\frac{1}{1-x^2})\mathrm dx
+    \]
+\end{frame}
+
+\begin{frame}{简例}
+    求不定积分
+    \[
+    \int \frac{\mathrm dx}{x^2(x^2+1)}
+    \]
+\end{frame}
+
+\subsection{换元法}
+
+\begin{frame}{第一换元法：链式法则}
+    设函数$F(u)$是$f(u)$在区间$I$上的一个原函数，又$u=\varphi(x)$在区间$I$上可导且其值域为$R(\varphi)\subset I$，则有
+    \[
+    \int f[\varphi(x)]\varphi'(x)\mathrm dx=F[\varphi(x)]+C.
+    \]
+\end{frame}
+
+\begin{frame}{例}
+    求
+    \[
+    \int \frac{1}{\arctan x(1+x^2)}\mathrm dx
+    \]
+\end{frame}
+
+\begin{frame}{第二换元法：反函数求导}
+    设函数$x=\varphi(t)$在区间$I$上可导且导数$\varphi'(t)\ne 0$，且$\int f[\varphi(t)]\varphi'(t)\mathrm dt=F(t)+C$，则
+    \[
+    \int f(x)\mathrm dx = F[\varphi^{-1}(x)]+C
+    \]
+    不好理解？
+\end{frame}
+
+\begin{frame}{例}
+    求
+    \[
+    \int \frac{\mathrm dx}{\sqrt{x^2+a^2}}\mathrm dx \quad(a>0)
+    \]
+\end{frame}
+
+\begin{frame}{例}
+    求
+    \[
+    \int \sqrt{a^2-x^2}\mathrm dx \quad(a>0)
+    \]
+\end{frame}
+
+\begin{frame}{例}
+    求
+    \[
+    \int \frac{\mathrm dx}{x\sqrt{x^2+1}}
+    \]
+\end{frame}
+
+\begin{frame}{分部积分法：导数的乘法法则}
+    设函数$u(x),v(x)$在区间$I$上可导，且$\int u'(x)v(x)\mathrm dx$存在，则
+    \[
+    \int u(x)v'(x)\mathrm dx=u(x)v(x) - \int u'(x)v(x)\mathrm dx
+    \]
+    用于$u(x)v'(x)$不易积分，但$v'(x)u(x)$易求出的情况
+\end{frame}
+
+\begin{frame}{例}
+    求
+    \[
+    \int xe^{-x}\mathrm dx
+    \]
+\end{frame}
+
+\begin{frame}{例}
+    求
+    \[
+    \int \arcsin x\mathrm dx
+    \]
+\end{frame}
+
+\begin{frame}{例}
+    求
+    \[
+    \int e^{ax}\sin bx\mathrm dx\quad (a\ne 0)
+    \]
+\end{frame}
+
+
+
+
+% -------------------------------------------------------
+% \section*{}
+% \begin{frame}{反馈问卷}
+%     \begin{figure}[H]
+%         \centering
+%         \includegraphics[width=0.5\linewidth]{qrcode.png}
+%     \end{figure}
+% \end{frame}
+% \begin{frame}
+% \vspace{25pt}
+% \[
+% \text{\Huge }
+% \]
+% \end{frame}
+
+\end{document}
